@@ -1,6 +1,8 @@
 direccionesModulo = (function () {
   var servicioDirecciones // Servicio que calcula las direcciones
   var mostradorDirecciones // Servicio muestra las direcciones
+  // var servicioDirecciones = new google.maps.DirectionsService();
+  // var mostradorDirecciones = new google.maps.DirectionsRenderer();
 
     // Calcula las rutas cuando se cambian los lugares de desde, hasta o algun punto intermedio
   function calcularRutasConClic () {
@@ -96,6 +98,47 @@ direccionesModulo = (function () {
         /* Completar la función calcularYMostrarRutas , que dependiendo de la forma en que el
          usuario quiere ir de un camino al otro, calcula la ruta entre esas dos posiciones
          y luego muestra la ruta. */
+
+        if (!servicioDirecciones)
+        {
+          servicioDirecciones = new google.maps.DirectionsService();
+          mostradorDirecciones = new google.maps.DirectionsRenderer();
+        }
+
+        mostradorDirecciones.setMap(mapa);
+
+        var start = document.getElementById('direccion').value;
+        var end = document.getElementById('agregar').value;
+
+        var comoIr = document.getElementById("comoIr").value
+        var travelMode = null;
+
+        switch (comoIr)
+        {
+          case 'Auto':
+            travelMode = 'DRIVING'
+            break;
+          case 'Caminando':
+            travelMode = 'WALKING'
+            break;
+          case 'Bus/Subterraneo/Tren':
+            travelMode = 'TRANSIT'
+            break;
+          default:
+            travelMode = 'DRIVING'
+        }
+
+        var request = {
+          origin: start,
+          destination: end,
+          travelMode: travelMode
+        };
+
+        servicioDirecciones.route(request, function(result, status) {
+          if (status == 'OK') {
+            mostradorDirecciones.setDirections(result);
+          }
+        });
   }
 
   return {
