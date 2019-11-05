@@ -128,10 +128,36 @@ direccionesModulo = (function () {
             travelMode = 'DRIVING'
         }
 
+        var waypoints = []
+
+        $("#puntosIntermedios option").each(function() {
+            // Add $(this).val() to your list
+            var latLngArray = $(this).val().split(',')
+            waypoints.push(
+              {
+                location: {
+                  lat: Number(latLngArray[0]), 
+                  lng: Number(latLngArray[1])
+                },
+                stopover: true
+              })
+        });
+
+        console.log('waypoints', waypoints)
+
         var request = {
           origin: start,
           destination: end,
-          travelMode: travelMode
+          travelMode: travelMode,
+          waypoints: waypoints
+          // waypoints: [
+          //   {
+          //   location: 'Joplin, MO',
+          //   stopover: false
+          //   },{
+          //   location: 'Oklahoma City, OK',
+          //   stopover: true
+          //   }]
         };
 
         servicioDirecciones.route(request, function(result, status) {
