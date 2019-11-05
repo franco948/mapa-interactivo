@@ -107,8 +107,8 @@ direccionesModulo = (function () {
 
         mostradorDirecciones.setMap(mapa);
 
-        var start = document.getElementById('direccion').value;
-        var end = document.getElementById('agregar').value;
+        var start = document.getElementById('desde').value;
+        var end = document.getElementById('hasta').value;
 
         var comoIr = document.getElementById("comoIr").value
         var travelMode = null;
