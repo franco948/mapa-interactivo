@@ -150,14 +150,6 @@ direccionesModulo = (function () {
           destination: end,
           travelMode: travelMode,
           waypoints: waypoints
-          // waypoints: [
-          //   {
-          //   location: 'Joplin, MO',
-          //   stopover: false
-          //   },{
-          //   location: 'Oklahoma City, OK',
-          //   stopover: true
-          //   }]
         };
 
         servicioDirecciones.route(request, function(result, status) {

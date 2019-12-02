@@ -44,7 +44,7 @@ lugaresModulo = (function () {
       type: [tipoDeLugar]
     };
 
-    servicio = new google.maps.places.PlacesService(map);
+    servicio = new google.maps.places.PlacesService(mapa);
     servicio.nearbySearch(request, marcadorModulo.marcarLugares);
   }
   return {
